@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <script>
+        //errorNote가 랜더링되기전에 스크립트코드가 먼저 실행되어서
+        //errorNote가 요소객체를 가져올 수 가 없다.
+        let errorNote = document.querySelector('#errorNote');
+        //null인 상황
+        console.dir(document.querySelector('#errorNote'));
+        errorNote.innerHTML = 'script태그가 html태그보다 위에 있습니다'
+    </script> -->
+
+    <h1>자바스크립트의 예외처리</h1>
+    <div id="errorNote" class="note"></div>
+
+    <script>
+        class HandleableError extends Error{
+            constructor(message){
+                super(message);
+            }
+        }
+
+
+        //errorNote가 랜더링되기전에 스크립트코드가 먼저 실행되어서
+        //errorNote가 요소객체를 가져올 수 가 없다.
+
+        //자바스크립트에서 예외가 발생하면 예외가 발생한 이후의 
+        try{
+        let errorNote = document.querySelector('#errorNote');
+        errorNote.innerHTML = 'script태그가 html태그보다 위에 있습니다'
+        }catch(error){
+            console.dir('catch block!')
+            console.dir('---------------dir------------')
+            console.dir(error);
+            console.dir('---------------dir------------')
+            console.error(error);
+            throw new HandleableError('우리가 만든 예외입니다')
+        }finally{
+            console.dir('final block!')
+
+        }
+        console.dir('try-catch-finally');
+    </script>
+
+    <h1>자바스크립트의 예외처리</h1>
+    <div id="errorNote" class="note">
+        트케파블록을 사용할 수 있다
+        에러클래스를 상속받아 커스텀에러를 만들수있다
+        요소객체 접근하는 코드가 있는 스크립트태그는 htmlbody 태그안의 최하단에 작성하는 것이 좋다
+    </div>
+</body>
+</html>
